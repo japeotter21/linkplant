@@ -2,11 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Tree of Links for Social Media
 
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/09d1f80f-81ff-4efe-8431-3acfc2f6887a' width='400' />
+<img src=https://github.com/japeotter21/linkplant/assets/97000604/26ba4173-347b-43d7-8528-2c55f9c31b87' width='400' />
 
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/d6bde7cc-dfb2-45dc-a730-63bf1ee4bd96)' width='200' />
-
-
+<img src='https://github.com/japeotter21/linkplant/assets/97000604/8c601cfb-599b-4397-bc2b-15a724f8d6aa' width='200' />
 
 
 ## Configure Available Links
