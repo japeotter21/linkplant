@@ -10,11 +10,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Configure Available Links
 
 To Do:
-<ul style="list-style-type:none;">
-  <li>⬜ actually map sites from profile</li>
-  <li>⬜ editable site information</li>
-  <li>⬜ set up db</li>
-  <li>⬜ deploy</li>
-</ul>
+<p>⬜ actually map sites from profile</p>
+<p>⬜ editable site information</p>
+<p>⬜ set up db</p>
+<p>⬜ deploy</p>
 
 <img src='https://github.com/japeotter21/linkplant/assets/97000604/f9b0b102-a2a4-41cb-a09c-1882c974900c' width='400' />
