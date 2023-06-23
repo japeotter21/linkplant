@@ -10,7 +10,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Configure Available Links
 
 To Do:
-<ul>
+<ul style={{listStyleType:'none'}}>
   <li>⬜ actually map sites from profile</li>
   <li>⬜ editable site information</li>
   <li>⬜ set up db</li>
