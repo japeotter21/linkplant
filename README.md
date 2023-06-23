@@ -13,4 +13,4 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 To Do...
 
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/152724b5-f008-4993-8363-536773f4bd9f)' width='200' />
+<img src='https://github.com/japeotter21/linkplant/assets/97000604/f9b0b102-a2a4-41cb-a09c-1882c974900c' width='400' />
