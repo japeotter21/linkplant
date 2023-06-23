@@ -24,7 +24,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
             <SiYoutube size={25} />
-          <h2 className={`text-2xl font-semibold`}>
+          <h2 className={`text-xl font-semibold`}>
             Youtube
             {/* <span className="inline-block transition-transform group-translate-x-1 motion-reduce:transform-none">
               -&gt;
@@ -42,7 +42,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <SiTiktok />
-          <h2 className={`text-2xl font-semibold`}>
+          <h2 className={`text-xl font-semibold`}>
             Tik Tok
             {/* <span className="inline-block transition-transform group-translate-x-1 motion-reduce:transform-none">
               -&gt;
@@ -60,7 +60,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <SiPatreon />
-          <h2 className={`text-2xl font-semibold`}>
+          <h2 className={`text-xl font-semibold`}>
             Patreon
           </h2>
           <p className={`text-sm opacity-50 lg:text-right`}>
