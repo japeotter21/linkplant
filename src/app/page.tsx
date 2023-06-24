@@ -19,7 +19,7 @@ export default function Home() {
         
         <a
           href="https://www.youtube.com/channel/UCKzFivbVW4htLbnCP234VsQ"
-          className="group flex gap-3 lg:grid lg:grid-cols-3 justify-between items-center w-full rounded-3xl border px-5 py-3 transition-colors bg-zinc-300 border-zinc-800 dark:border-neutral-700 dark:bg-neutral-800 "
+          className="group flex gap-3 lg:grid lg:grid-cols-3 justify-between items-center w-full rounded-3xl border px-5 py-3 transition-colors bg-gray-50 border-zinc-800 dark:border-neutral-700 dark:bg-neutral-800 "
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -37,7 +37,7 @@ export default function Home() {
 
         <a
           href="https://www.tiktok.com/@tatsuyoshiguitar"
-          className="group flex gap-3 lg:grid lg:grid-cols-3 justify-between items-center w-full rounded-3xl border px-5 py-3 transition-colors bg-zinc-300 border-zinc-800 dark:border-neutral-700 dark:bg-neutral-800 "
+          className="group flex gap-3 lg:grid lg:grid-cols-3 justify-between items-center w-full rounded-3xl border px-5 py-3 transition-colors bg-gray-50 border-zinc-800 dark:border-neutral-700 dark:bg-neutral-800 "
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -55,7 +55,7 @@ export default function Home() {
 
         <a
           href="https://www.patreon.com/tatsuyoshi"
-          className="group flex gap-3 lg:grid lg:grid-cols-3 justify-between items-center w-full rounded-3xl border px-5 py-3 transition-colors bg-zinc-300 border-zinc-800 dark:border-neutral-700 dark:bg-neutral-800 "
+          className="group flex gap-3 lg:grid lg:grid-cols-3 justify-between items-center w-full rounded-3xl border px-5 py-3 transition-colors bg-gray-50 border-zinc-800 dark:border-neutral-700 dark:bg-neutral-800 "
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -68,7 +68,7 @@ export default function Home() {
           </p>
         </a>
         <Link href="/config">
-            <button type="submit" className='border border-zinc-600 rounded-lg bg-[#f5b504] bg-opacity-80 px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'>
+            <button type="submit" className='border border-zinc-600 rounded-lg bg-[#f5b504] px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'>
                 Edit Profile
             </button>
         </Link>
