@@ -2,17 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Tree of Links for Social Media
 
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/26ba4173-347b-43d7-8528-2c55f9c31b87' width='600' />
+<img src='https://github.com/japeotter21/linkplant/assets/97000604/dad72a3c-d3ca-4f74-ab4f-f1bab58adad9' width='600' />
 
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/8c601cfb-599b-4397-bc2b-15a724f8d6aa' width='200' />
+<img src='https://github.com/japeotter21/linkplant/assets/97000604/3362beb2-b7fd-4529-902d-7d087e514a18' width='200' />
+
+
 
 
 ## Configure Available Links
+
+<img src='https://github.com/japeotter21/linkplant/assets/97000604/c481a5d0-8d26-4de7-bfb1-d426550c6605' width='400' />
 
 To Do:
 <p>⬜ actually map sites from profile</p>
 <p>⬜ editable site information</p>
 <p>⬜ set up db</p>
 <p>⬜ deploy</p>
-
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/f9b0b102-a2a4-41cb-a09c-1882c974900c' width='400' />
