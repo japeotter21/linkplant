@@ -5,28 +5,32 @@ import { BsArrowRightCircle, BsArrowUpLeftCircle, BsArrowUpRightCircle, BsChevro
 import Link from 'next/link';
 import Image from 'next/image'
 import profile from '../assets/unnamed.jpg'
+import axios from 'axios'
 export default function Config() {
+    const [sites, setSites] = useState<Array<{
+        id: number,
+        site: string,
+        profile: string,
+        description: string
+        }>
+    >([])
 
-    const [sites, setSites] = useState([])
+    useEffect(()=>{
+        axios.get('http://localhost:3001/sites')
+        .then(res=>{
+            setSites(res.data.documents)
+        })
+    },[])
 
 
-    const Icons: {site: string,profile: string,description: string, icon: any}[] = [
+    const Icons: {icon: any}[] = [
         {
-            site: 'youtube.com/channel/',
-            profile: 'UCKzFivbVW4htLbnCP234VsQ',
-            description: '@tatsuyoshiguitar',
             icon: <SiYoutube style={{color:"#FF0000"}} size={50}/>
         },
         {
-            site: 'tiktok.com/',
-            profile: '@tatsuyoshiguitar',
-            description: '@tatsuyoshiguitar',
             icon: <SiTiktok style={{color:"#FF0050"}} size={42}/>
         },
         {
-            site: 'patreon.com/',
-            profile: 'tatsuyoshi',
-            description: '@tatsuyoshi',
             icon: <SiPatreon style={{color:"#ff424d"}} size={40}/>
         }
     ]
@@ -34,10 +38,16 @@ export default function Config() {
     const SiteCards = () => {
         return (
             <>
-                { Icons.map((item,id)=> (
+                { sites.map((item,id)=> (
                     <div className='py-4'>
                         <div className="flex justify-between items-start py-3 px-5">
-                            {item.icon}
+                            {item.site.includes('youtube') ?
+                            <>{Icons[0].icon}</>
+                            : item.site.includes('tiktok') ?
+                            <>{Icons[1].icon}</>
+                            :
+                            <>{Icons[2].icon}</>
+                            }
                             <div className='flex gap-2 items-start'>
                                 {/* <button type="submit" className='border border-blue-500 bg-blue-50 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#242424]'>
                                     <BsPencil style={{color:'#3b82f6'}} />
@@ -136,15 +146,7 @@ export default function Config() {
             </div>
             <div className="w-3/4 lg:w-1/2 mx-auto gap-5 border border-zinc-600 rounded-lg bg-gray-50 divide-y-2 divide-neutral-400 px-2">
                 <SiteCards />
-                { sites.length > 0 ? 
-                    sites.map((item,id)=>
-                        <>
-                            <SiteForm />
-                        </>
-                    )
-                :
-                    <SiteForm />
-                }
+                <SiteForm />
             </div>
             <div className='w-3/4 lg:w-1/2 mx-auto mt-5 gap-4 flex justify-between lg:justify-end'>
                 <Link href="/" >
