@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react'
 import { SiPatreon, SiTiktok, SiYoutube } from 'react-icons/si'
 import { BsArrowRightCircle, BsArrowUpLeftCircle, BsArrowUpRightCircle, BsChevronDown, BsPencil, BsPlus, BsPlusCircle, BsSave, BsTrash, BsX } from 'react-icons/bs'
 import Link from 'next/link';
+import Image from 'next/image'
+import profile from '../assets/unnamed.jpg'
 export default function Config() {
 
     const [sites, setSites] = useState([])
@@ -121,6 +123,15 @@ export default function Config() {
             <div className="mb-7 w-3/4 mx-auto">
                 <h2 className={`text-3xl font-semibold text-center`}>
                     Edit Profile
+                </h2>
+            </div>
+            <div className="items-center text-sm mb-5">
+                <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto mb-4'
+                    width={80}
+                    height={80}
+                />
+                <h2 className={`text-md font-semibold text-center px-10`}>
+                    Guitar riffs, beats, and occasionally something worth watching
                 </h2>
             </div>
             <div className="w-3/4 lg:w-1/2 mx-auto gap-5 border border-zinc-600 rounded-lg bg-gray-50 divide-y-2 divide-neutral-400 px-2">
