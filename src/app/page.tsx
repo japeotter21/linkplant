@@ -68,7 +68,7 @@ export default function Home() {
           </p>
         </a>
         <Link href="/config">
-            <button type="submit" className='border border-zinc-600 rounded-lg bg-[#f5b504] px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'>
+            <button type="submit" className='border border-zinc-600 rounded-lg bg-[#f5b504] hover:bg-opacity-60 px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'>
                 Edit Profile
             </button>
         </Link>

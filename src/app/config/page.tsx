@@ -42,7 +42,7 @@ export default function Config() {
                                 {/* <button type="submit" className='border border-blue-500 bg-blue-50 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#242424]'>
                                     <BsPencil style={{color:'#3b82f6'}} />
                                 </button> */}
-                                <button type="submit" className='border border-red-500 bg-red-50 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
+                                <button type="submit" className='border border-red-500 bg-red-50 hover:bg-red-200 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
                                     <BsTrash style={{color:"#ef4444"}} />
                                 </button>
                             </div>
@@ -89,7 +89,7 @@ export default function Config() {
                                 </select>
                             </div>
                             <div className='flex gap-2 items-start'>
-                                <button type="submit" className='border border-red-500 bg-red-50 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
+                                <button type="submit" className='border border-red-500 bg-red-50 hover:bg-red-200 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
                                     <BsTrash style={{color:"#ef4444"}} />
                                 </button>
                             </div>
@@ -110,7 +110,7 @@ export default function Config() {
                                 </div>
                             </div>
                         </div>
-                        <button className='border border-zinc-600 rounded-lg bg-[#f5b504] bg-opacity-80 px-5 py-1 mt-5 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'>
+                        <button className='border border-zinc-600 rounded-lg bg-[#f5b504] bg-opacity-80 hover:bg-opacity-60 px-5 py-1 mt-5 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'>
                             Add to Profile
                         </button>
                     </div>
@@ -125,14 +125,14 @@ export default function Config() {
                     Edit Profile
                 </h2>
             </div>
-            <div className="items-center text-sm mb-5">
-                <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto mb-4'
+            <div className="text-sm mb-5 w-max mx-auto relative">
+                <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto'
                     width={80}
                     height={80}
                 />
-                <h2 className={`text-md font-semibold text-center px-10`}>
-                    Guitar riffs, beats, and occasionally something worth watching
-                </h2>
+                <button className='absolute bottom-0 -right-2 border border-blue-500 hover:bg-blue-200 bg-blue-50 rounded-lg px-2 py-2 shadow-[0_0_1px_#242424]'>
+                    <BsPencil style={{color:'#3b82f6'}} />
+                </button>
             </div>
             <div className="w-3/4 lg:w-1/2 mx-auto gap-5 border border-zinc-600 rounded-lg bg-gray-50 divide-y-2 divide-neutral-400 px-2">
                 <SiteCards />
@@ -148,11 +148,11 @@ export default function Config() {
             </div>
             <div className='w-3/4 lg:w-1/2 mx-auto mt-5 gap-4 flex justify-between lg:justify-end'>
                 <Link href="/" >
-                    <button className='border border-zinc-600 rounded-lg bg-gray-200 px-4 py-2 text-neutral-700'>
+                    <button className='border border-zinc-600 rounded-lg bg-gray-200 hover:bg-gray-300 px-4 py-2 text-neutral-700'>
                         Cancel
                     </button>
                 </Link>
-                <button className='border border-zinc-600 rounded-lg bg-green-700 px-4 py-2 text-neutral-200'>
+                <button className='border border-zinc-600 rounded-lg bg-green-700 hover:bg-green-600 px-4 py-2 text-neutral-200'>
                     Save Changes
                 </button>
             </div>
