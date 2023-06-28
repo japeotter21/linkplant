@@ -15,7 +15,7 @@ export default function Home() {
   >([])
 
   useEffect(()=>{
-      axios.get('http://localhost:3001/sites')
+      axios.get('/api/sites')
       .then(res=>{
           setSites(res.data.documents)
       })
