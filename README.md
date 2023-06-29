@@ -18,4 +18,5 @@ To Do:
 <p>✅ set up db</p>
 <p>✅ actually map sites from profile</p>
 <p>⬜ editable site information</p>
+<p>⬜ edit permissions</p>
 <p>⬜ deploy</p>
