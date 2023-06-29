@@ -7,46 +7,49 @@ import Image from 'next/image'
 import profile from '../assets/unnamed.jpg'
 import axios from 'axios'
 export default function Config() {
-    const [sites, setSites] = useState<Array<{
+
+    type Site = {
         id: number,
         site: string,
         profile: string,
         description: string
-        }>
-    >([])
+    }
+    
+    type User = {
+      id: number,
+      user: string,
+      bio: string
+    }
+    
+    const [sites, setSites] = useState<Array<Site>>([])
+    const [user, setUser] = useState({} as User)
+    const [loading, setLoading] = useState(true)
 
     useEffect(()=>{
-        axios.get('/api/sites')
-        .then(res=>{
-            setSites(res.data.documents)
-        })
+        const endpoints = ['/api/user', '/api/sites']
+        axios.all(endpoints.map((endpoint) => axios.get(endpoint)))
+        .then(
+            axios.spread(({data: user}, {data: sites}) => {
+                setUser(user.documents[0])
+                setSites(sites.documents)
+                setLoading(false)
+          })
+        );
     },[])
 
-
-    const Icons: {icon: any}[] = [
-        {
-            icon: <SiYoutube style={{color:"#FF0000"}} size={50}/>
-        },
-        {
-            icon: <SiTiktok style={{color:"#FF0050"}} size={42}/>
-        },
-        {
-            icon: <SiPatreon style={{color:"#ff424d"}} size={40}/>
-        }
-    ]
 
     const SiteCards = () => {
         return (
             <>
                 { sites.map((item,id)=> (
-                    <div className='py-4'>
+                    <div className='py-4' key={id}>
                         <div className="flex justify-between items-start py-3 px-5">
                             {item.site.includes('youtube') ?
-                            <>{Icons[0].icon}</>
+                                <SiYoutube style={{color:"#FF0000"}} size={50}/>
                             : item.site.includes('tiktok') ?
-                            <>{Icons[1].icon}</>
+                                <SiTiktok style={{color:"#FF0050"}} size={42}/>
                             :
-                            <>{Icons[2].icon}</>
+                                <SiPatreon style={{color:"#ff424d"}} size={40}/>
                             }
                             <div className='flex gap-2 items-start'>
                                 {/* <button type="submit" className='border border-blue-500 bg-blue-50 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#242424]'>
@@ -90,12 +93,12 @@ export default function Config() {
                                 {/* <label htmlFor="site" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a Site</label> */}
                                 <select id="site" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option selected>Select a Site</option>
-                                    <option value="youtube">Youtube</option>
-                                    <option value='tiktok'>Tik Tok</option>
-                                    <option value='instagram'>Instagram</option>
-                                    <option value='patreon'>Patreon</option>
-                                    <option value='twitch'>Twitch</option>
-                                    <option value='twitter'>Twitter</option>
+                                    <option value="youtube.com/channel/">Youtube</option>
+                                    <option value='tiktok.com/'>Tik Tok</option>
+                                    <option value='instagram.com'>Instagram</option>
+                                    <option value='patreon.com/'>Patreon</option>
+                                    <option value='twitch.tv/'>Twitch</option>
+                                    <option value='twitter.com/'>Twitter</option>
                                 </select>
                             </div>
                             <div className='flex gap-2 items-start'>
@@ -143,6 +146,11 @@ export default function Config() {
                 <button className='absolute bottom-0 -right-2 border border-blue-500 hover:bg-blue-200 bg-blue-50 rounded-lg px-2 py-2 shadow-[0_0_1px_#242424]'>
                     <BsPencil style={{color:'#3b82f6'}} />
                 </button>
+            </div>
+            <div className="text-sm mb-5 w-1/2 mx-auto relative">
+                <textarea id="bio" name="bio" required className='border border-zinc-600 bg-gray-50 p-2 rounded-md w-full font-medium'
+                    value={user.bio}
+                />
             </div>
             <div className="w-3/4 lg:w-1/2 mx-auto gap-5 border border-zinc-600 rounded-lg bg-gray-50 divide-y-2 divide-neutral-400 px-2">
                 <SiteCards />
