@@ -33,6 +33,9 @@ export default function Config() {
     const [editBio, setEditBio] = useState('')
     const [newPicture, setNewPicture] = useState('')
     const [deleteSite, setDeleteSite] = useState('')
+    const [updatedItems, setUpdatedItems] = useState(0)
+    const [itemsToUpdate, setItemsToUpdate] = useState(0)
+    const [readyUpdate, setReadyUpdate] = useState(false)
 
     useEffect(()=>{
         const endpoints = ['/api/user', '/api/sites']
@@ -58,12 +61,53 @@ export default function Config() {
         }
     },[sites])
 
+    useEffect(()=>{
+        if(readyUpdate && itemsToUpdate > 0 && itemsToUpdate === updatedItems)
+        {
+            axios.get('/api/sites')
+            .then(result=>{
+                setSites(result.data.documents)
+                setItemsToUpdate(0)
+                setUpdatedItems(0)
+                setReadyUpdate(false)
+            })
+        }
+        else if (readyUpdate && itemsToUpdate > 0)
+        {
+            setReadyUpdate(false)
+            setTimeout(()=>{
+                setReadyUpdate(true)
+            },500)
+        }
+    },[readyUpdate])
+
     function EditPicture() {
         console.log('pic:', newPicture)
     }
 
-    function EditSite(formData: any) {
-        console.log(formData)
+    function EditSites(formData: any) {
+        setReadyUpdate(false)
+        setUpdatedItems(0)
+        setItemsToUpdate(0)
+        sites.forEach((item,id)=>{
+            const postObj = {
+                filter: {site: sites[id].site},
+                profile: (document.getElementById(`link${id}`) as HTMLInputElement).value,
+                description: (document.getElementById(`description${id}`) as HTMLInputElement).value,
+            }
+            if(item.profile !== postObj.profile || item.description !== postObj.description)
+            {
+                setItemsToUpdate(itemsToUpdate+1)
+                axios.post('/api/update',postObj)
+                .then(res=>{
+                    setUpdatedItems(updatedItems+1)
+                })
+            }
+            if(id === sites.length - 1)
+            {
+                setReadyUpdate(true)
+            }
+        })
     }
 
     function AddSite(formData: any) {
@@ -136,15 +180,17 @@ export default function Config() {
                         <div className='mx-5 mt-2'>
                             <p className='font-semibold'>Details</p>
                             <hr className='border-gray-400 my-3'/>
-                            <form id="sites" onSubmit={(e)=>{e.preventDefault()
-                                EditSite(e)}}
-                            >
+                            <form id={`site${id}`}>
                                 <div className='flex flex-col gap-3 my-4'>
                                     <div className='flex flex-col lg:flex-row justify-between'>
                                         <p className='font-medium'>Link</p>
                                         <div className='flex'>
-                                            <p className='hidden lg:block border border-gray-400 bg-gray-300 p-2 rounded-md text-neutral-600 rounded-r-sm'>{item.site}</p>
-                                            <input type='text' id="link" name="link"
+                                            <p className='hidden lg:block border border-gray-400 bg-gray-300 p-2 rounded-md text-neutral-600 rounded-r-sm'
+                                                id={`site${id}`}
+                                            >
+                                                {item.site}
+                                            </p>
+                                            <input type='text' id={`link${id}`} name={`link${id}`}
                                                 required
                                                 className='border lg:border-l-0 border-gray-300 bg-inherit p-2 rounded-md lg:rounded-l-sm'
                                                 defaultValue={item.profile}
@@ -153,7 +199,7 @@ export default function Config() {
                                     </div>
                                     <div className='flex flex-col lg:flex-row justify-between'>
                                         <p className='font-medium'>Description</p>
-                                        <input type='text' id="description" name="description"
+                                        <input type='text' id={`description${id}`} name={`description${id}`}
                                             required
                                             className='border border-gray-300 bg-inherit p-2 rounded-md text-truncate'
                                             defaultValue={item.description}
@@ -275,7 +321,9 @@ export default function Config() {
                             Cancel
                         </button>
                     </Link>
-                    <button className='border border-zinc-600 rounded-lg bg-green-700 hover:bg-green-600 px-4 py-2 text-neutral-200'>
+                    <button className='border border-zinc-600 rounded-lg bg-green-700 hover:bg-green-600 px-4 py-2 text-neutral-200'
+                        onClick={EditSites}
+                    >
                         Save Changes
                     </button>
                 </div>
