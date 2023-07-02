@@ -24,15 +24,15 @@ export default function Config() {
     
     const [sites, setSites] = useState<Array<Site>>([])
     const [allSites, setAllSites] = useState(['youtube.com/channel/', 'tiktok.com/', 'instagram.com/', 'patreon.com/', 'twitch.tv/', 'twitter.com/'])
+    const [filteredSites, setFilteredSites] = useState([''])
     const [user, setUser] = useState({} as User)
     const [loading, setLoading] = useState(true)
+    const [showDelete, setShowDelete] = useState(false)
     const [upload, setUpload] = useState(false)
     const [profilePic, setProfilePic] = useState(profile)
     const [editBio, setEditBio] = useState('')
-    const [editLink, setEditLink] = useState('')
-    const [editDescription, setEditDescription] = useState('')
     const [newPicture, setNewPicture] = useState('')
-    const [newSite, setNewSite] = useState('')
+    const [deleteSite, setDeleteSite] = useState('')
 
     useEffect(()=>{
         const endpoints = ['/api/user', '/api/sites']
@@ -54,12 +54,16 @@ export default function Config() {
             sites.forEach((site,id)=>{
                 filterSitesTemp.includes(site.site) ? filterSitesTemp.splice(filterSitesTemp.indexOf(site.site), 1) : <></>
             })
-            setAllSites(filterSitesTemp)
+            setFilteredSites(filterSitesTemp)
         }
-    },[sites, loading])
+    },[sites])
 
     function EditPicture() {
         console.log('pic:', newPicture)
+    }
+
+    function EditSite(formData: any) {
+        console.log(formData)
     }
 
     function AddSite(formData: any) {
@@ -77,25 +81,28 @@ export default function Config() {
             }
             axios.post('/api/sites',postObj)
             .then(res=>{
-                setLoading(true)
                 axios.get('/api/sites')
                 .then(result=>{
                     setSites(result.data.documents)
-                    setLoading(false)
                 })
             })
         }
     }
 
-    function Delete(site: string) {
-        const delObj = {site: site}
+    function handleDelete(site: string) {
+        setShowDelete(true)
+        setDeleteSite(site)
+    }
+
+    function Delete() {
+        const delObj = {site: deleteSite}
         axios.post('/api/delete', delObj)
             .then(res=>{
-                setLoading(true)
                 axios.get('/api/sites')
                 .then(result=>{
                     setSites(result.data.documents)
-                    setLoading(false)
+                    setShowDelete(false)
+                    setDeleteSite('')
                 })
             })
     }
@@ -120,7 +127,7 @@ export default function Config() {
                                 <SiTwitter style={{color:"#1da1f2"}} size={40}/>
                             }
                             <div className='flex gap-2 items-start'>
-                                <button onClick={()=>Delete(item.site)}
+                                <button onClick={()=>handleDelete(item.site)}
                                     className='border border-red-500 bg-red-50 hover:bg-red-200 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
                                     <BsTrash style={{color:"#ef4444"}} />
                                 </button>
@@ -129,29 +136,31 @@ export default function Config() {
                         <div className='mx-5 mt-2'>
                             <p className='font-semibold'>Details</p>
                             <hr className='border-gray-400 my-3'/>
-                            <div className='flex flex-col gap-3 my-4'>
-                                <div className='flex flex-col lg:flex-row justify-between'>
-                                    <p className='font-medium'>Link</p>
-                                    <div className='flex'>
-                                        <p className='hidden lg:block border border-gray-400 bg-gray-300 p-2 rounded-md text-neutral-600 rounded-r-sm'>{item.site}</p>
-                                        <input type='text' id="link" name="link"
+                            <form id="sites" onSubmit={(e)=>{e.preventDefault()
+                                EditSite(e)}}
+                            >
+                                <div className='flex flex-col gap-3 my-4'>
+                                    <div className='flex flex-col lg:flex-row justify-between'>
+                                        <p className='font-medium'>Link</p>
+                                        <div className='flex'>
+                                            <p className='hidden lg:block border border-gray-400 bg-gray-300 p-2 rounded-md text-neutral-600 rounded-r-sm'>{item.site}</p>
+                                            <input type='text' id="link" name="link"
+                                                required
+                                                className='border lg:border-l-0 border-gray-300 bg-inherit p-2 rounded-md lg:rounded-l-sm'
+                                                defaultValue={item.profile}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col lg:flex-row justify-between'>
+                                        <p className='font-medium'>Description</p>
+                                        <input type='text' id="description" name="description"
                                             required
-                                            className='border lg:border-l-0 border-gray-300 bg-inherit p-2 rounded-md lg:rounded-l-sm'
-                                            value={item.profile}
-                                            onChange={(e)=>setEditLink(e.target.value)}
+                                            className='border border-gray-300 bg-inherit p-2 rounded-md text-truncate'
+                                            defaultValue={item.description}
                                         />
                                     </div>
                                 </div>
-                                <div className='flex flex-col lg:flex-row justify-between'>
-                                    <p className='font-medium'>Description</p>
-                                    <input type='text' id="description" name="description"
-                                        required
-                                        className='border border-gray-300 bg-inherit p-2 rounded-md text-truncate'
-                                        value={item.description}
-                                        onChange={(e)=>setEditDescription(e.target.value)}
-                                    />
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 ))
@@ -173,7 +182,7 @@ export default function Config() {
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     >
                                         <option selected>Select a Site</option>
-                                        {allSites.map((site,id)=>
+                                        {filteredSites.map((site,id)=>
                                             <option value={site} key={id}>{site.split('.')[0]}</option>
                                         )}
                                     </select>
@@ -292,6 +301,29 @@ export default function Config() {
                         onClick={EditPicture}
                     >
                         Save to Profile
+                    </button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={showDelete} onClose={()=>{setShowDelete(false)
+                setDeleteSite('')}}
+            >
+                <DialogTitle className='font-medium'>Delete {deleteSite.split('.com')[0]} profile</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this site?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <button className='border border-zinc-600 rounded-lg bg-gray-200 hover:bg-gray-300 px-4 py-2 text-neutral-700'
+                        onClick={()=>{setShowDelete(false)
+                            setDeleteSite('')}}
+                    >
+                        Cancel
+                    </button>
+                    <button className='border border-[#ef4444] rounded-lg bg-red-100 hover:bg-red-200 px-4 py-2 text-[#ef4444]'
+                        onClick={Delete}
+                    >
+                        Delete
                     </button>
                 </DialogActions>
             </Dialog>
