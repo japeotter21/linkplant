@@ -56,7 +56,7 @@ export default function Config() {
             })
             setAllSites(filterSitesTemp)
         }
-    },[sites])
+    },[sites, loading])
 
     function EditPicture() {
         console.log('pic:', newPicture)
@@ -87,6 +87,19 @@ export default function Config() {
         }
     }
 
+    function Delete(site: string) {
+        const delObj = {site: site}
+        axios.post('/api/delete', delObj)
+            .then(res=>{
+                setLoading(true)
+                axios.get('/api/sites')
+                .then(result=>{
+                    setSites(result.data.documents)
+                    setLoading(false)
+                })
+            })
+    }
+
     const SiteCards = () => {
         return (
             <>
@@ -100,14 +113,15 @@ export default function Config() {
                             : item.site.includes('patreon') ?
                                 <SiPatreon style={{color:"#ff424d"}} size={40}/>
                             : item.site.includes('twitch') ?
-                                <SiTwitch  style={{color:"#6441a5"}} size={40}/>
+                                <SiTwitch style={{color:"#6441a5"}} size={40}/>
                             : item.site.includes('instagram') ?
                                 <SiInstagram style={{color:"#c13584"}} size={40}/>
                             :
                                 <SiTwitter style={{color:"#1da1f2"}} size={40}/>
                             }
                             <div className='flex gap-2 items-start'>
-                                <button type="submit" className='border border-red-500 bg-red-50 hover:bg-red-200 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
+                                <button onClick={()=>Delete(item.site)}
+                                    className='border border-red-500 bg-red-50 hover:bg-red-200 rounded-lg px-3 py-2 flex items-center mx-auto shadow-[0_0_1px_#3d3d3d]'>
                                     <BsTrash style={{color:"#ef4444"}} />
                                 </button>
                             </div>
