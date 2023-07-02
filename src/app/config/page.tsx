@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react'
+import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@mui/material';
 import { SiPatreon, SiTiktok, SiYoutube } from 'react-icons/si'
-import { BsArrowRightCircle, BsArrowUpLeftCircle, BsArrowUpRightCircle, BsChevronDown, BsPencil, BsPlus, BsPlusCircle, BsSave, BsTrash, BsX } from 'react-icons/bs'
+import { BsPencil, BsTrash } from 'react-icons/bs'
 import Link from 'next/link';
 import Image from 'next/image'
 import profile from '../assets/unnamed.jpg'
@@ -24,6 +25,7 @@ export default function Config() {
     const [sites, setSites] = useState<Array<Site>>([])
     const [user, setUser] = useState({} as User)
     const [loading, setLoading] = useState(true)
+    const [upload, setUpload] = useState(false)
 
     useEffect(()=>{
         const endpoints = ['/api/user', '/api/sites']
@@ -37,6 +39,9 @@ export default function Config() {
         );
     },[])
 
+    function EditPicture() {
+
+    }
 
     const SiteCards = () => {
         return (
@@ -157,12 +162,14 @@ export default function Config() {
                         width={80}
                         height={80}
                     />
-                    <button className='absolute bottom-0 -right-2 border border-blue-500 hover:bg-blue-200 bg-blue-50 rounded-lg px-2 py-2 shadow-[0_0_1px_#242424]'>
+                    <button className='absolute bottom-0 -right-2 border border-blue-500 hover:bg-blue-200 bg-blue-50 rounded-lg px-2 py-2 shadow-[0_0_1px_#242424]'
+                        onClick={()=>setUpload(true)}
+                    >
                         <BsPencil style={{color:'#3b82f6'}} />
                     </button>
                 </div>
                 <div className="text-sm mb-5 w-1/2 mx-auto relative">
-                    <textarea id="bio" name="bio" required className='border border-zinc-600 bg-gray-50 p-2 rounded-md w-full font-medium'
+                    <textarea id="bio" name="bio" placeholder='Add a bio here' className='border border-zinc-600 bg-gray-50 p-2 rounded-md w-full font-medium'
                         value={user.bio}
                     />
                 </div>
@@ -182,7 +189,16 @@ export default function Config() {
                 </div>
             </>
             }
-            
+            <Dialog open={upload} onClose={()=>setUpload(false)}>
+                <DialogTitle>Edit Profile Picture</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        <input type='file' id="profile" name="profile"
+                            accept="image/png, image/jpeg"
+                        />
+                    </DialogContentText>
+                </DialogContent>
+            </Dialog>
         </main>
     )
 }
