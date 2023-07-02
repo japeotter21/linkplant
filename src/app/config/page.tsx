@@ -71,6 +71,11 @@ export default function Config() {
                 setUpdatedItems(0)
                 setReadyUpdate(false)
             })
+            axios.get('/api/user')
+            .then(res=>{
+                setUser(res.data.documents[0])
+                setEditBio(res.data.documents[0].bio)
+            })
         }
         else if (readyUpdate && itemsToUpdate > 0)
         {
@@ -89,6 +94,18 @@ export default function Config() {
         setReadyUpdate(false)
         setUpdatedItems(0)
         setItemsToUpdate(0)
+        if(user.bio !== editBio)
+        {
+            const postObj = {
+                filter: {user: user.user},
+                bio: editBio,
+            }
+            setItemsToUpdate(itemsToUpdate+1)
+            axios.post('/api/update?type=user', postObj)
+            .then(res=>{
+                setUpdatedItems(updatedItems+1)
+            })
+        }
         sites.forEach((item,id)=>{
             const postObj = {
                 filter: {site: sites[id].site},
@@ -98,7 +115,7 @@ export default function Config() {
             if(item.profile !== postObj.profile || item.description !== postObj.description)
             {
                 setItemsToUpdate(itemsToUpdate+1)
-                axios.post('/api/update',postObj)
+                axios.post('/api/update?type=site',postObj)
                 .then(res=>{
                     setUpdatedItems(updatedItems+1)
                 })
