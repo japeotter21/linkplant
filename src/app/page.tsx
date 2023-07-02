@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react'
-import { SiPatreon, SiTiktok, SiYoutube } from 'react-icons/si'
+import { SiPatreon, SiTiktok, SiYoutube, SiTwitch, SiInstagram, SiTwitter } from 'react-icons/si'
 import Image from 'next/image'
 import profile from './assets/unnamed.jpg'
 import Link from 'next/link'
@@ -75,8 +75,14 @@ const [loading, setLoading] = useState(true)
                     <SiYoutube />
                   : item.site.includes('tiktok') ?
                     <SiTiktok />
-                  :
+                  : item.site.includes('patreon') ?
                     <SiPatreon />
+                  : item.site.includes('twitch') ?
+                    <SiTwitch />
+                  : item.site.includes('instagram') ?
+                    <SiInstagram />
+                  :
+                    <SiTwitter />
                   }
                 <h2 className={`text-xl font-semibold`}>
                   {item.site.split('.com')[0].charAt(0).toUpperCase()}
