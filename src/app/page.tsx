@@ -40,26 +40,6 @@ const [allowEdit, setAllowEdit] = useState(false)
     );
   },[])
 
-  useEffect(()=>{
-    if(allowEdit)
-    {
-      sessionStorage.setItem('pw','1')
-      setTimeout(()=>{
-          setAllowEdit(false)
-      },2000)
-    }
-    if(!allowEdit)
-    {
-      sessionStorage.removeItem('pw')
-    }
-  },[allowEdit])
-
-  function TryPw() {
-    axios.post('/api/edit',{data:pw})
-    .then(res=>{
-      setAllowEdit(true)
-    })
-  }
   return (
     <main className="flex min-h-screen flex-col items-center gap-4">
       { loading ?
