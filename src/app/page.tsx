@@ -78,7 +78,7 @@ const [allowEdit, setAllowEdit] = useState(false)
         </>
       :
       <>
-        <button onClick={()=>setShowPw(true)} className='h-[20px] w-[20px]'></button>
+        <button onClick={()=>setShowPw(true)} className='h-[20px] w-[25px]'></button>
         <div className="items-center text-sm mb-5 mt-4">
             <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto mb-4'
               width={80}
