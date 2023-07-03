@@ -19,5 +19,5 @@ To Do:
 <p>✅ actually map sites from profile</p>
 <p>✅ editable site information</p>
 <p>✅ edit permissions</p>
-<p>⬜ deploy</p>
+<p>✅ deploy</p>
 <p>⬜ connect S3 for profile picture editing</p>
