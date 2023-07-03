@@ -65,7 +65,7 @@ const [allowEdit, setAllowEdit] = useState(false)
       { loading ?
         <>
           <div className="items-center text-sm mb-5 mt-10">
-              <div className="animate-pulse flex flex-col items-center mt-2">
+              <div className="animate-pulse flex flex-col items-center">
                   <div className="h-[80px] bg-gray-500 rounded-3xl w-[80px] mb-4"></div>
                   <div className="h-5 bg-gray-500 rounded-full w-48 mb-4"></div>
               </div>
@@ -78,7 +78,6 @@ const [allowEdit, setAllowEdit] = useState(false)
         </>
       :
       <>
-        <button onClick={()=>setShowPw(true)} className='h-[20px] w-[20px]'></button>
         <div className="items-center text-sm mb-5 mt-4">
             <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto mb-4'
               width={80}
@@ -123,26 +122,7 @@ const [allowEdit, setAllowEdit] = useState(false)
               </a>
             ))
           }
-          { allowEdit ?
-          <Link href="/config">
-              <button className='border border-zinc-600 rounded-lg bg-[#f5b504] hover:bg-opacity-60 px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'
-              >
-                  Edit Profile
-              </button>
-          </Link>
-          :
-          <></>
-          }
         </div>
-        <Dialog open={showPw} onClose={()=>setShowPw(false)}>
-          <DialogContent>
-              <form onSubmit={(e)=>{e.preventDefault()
-                TryPw()}}
-              >
-                <input type='password' className='border-gray-200' value={pw} onChange={(e)=>setPw(e.target.value)} />
-              </form>
-          </DialogContent>
-        </Dialog>
       </>
       }
     </main>
