@@ -1,5 +1,6 @@
 require('dotenv').config()
-const axios = require('axios')
+import axios from 'axios'
+import AWS from 'aws-sdk'
 
 export default function handler(req, res) {
     if (req.method === 'POST')
@@ -36,7 +37,7 @@ export default function handler(req, res) {
                 res.status(400).json({data: 'request failed'})
             });
         }
-        else
+        else if(req.query.type === 'site')
         {
             const data = JSON.stringify({
                 "collection": "sites",
@@ -68,6 +69,37 @@ export default function handler(req, res) {
             .catch(function (error) {
                 res.status(400).json({data: 'request failed'})
             });
+        }
+        else if (req.query.type === 'picture')
+        {
+            const region = "us-east-2"
+            const accessKey = process.env.AWS_KEY
+            const secretKey = process.env.AWS_SECRET
+            const bucket = "linktreepics"
+            AWS.config.update({
+                accessKeyId: accessKey,
+                secretAccessKey: secretKey
+            })
+            const s3 = new AWS.S3({
+                region: region
+            })
+            const params = ({
+                Bucket: bucket,
+                Key: 'unnamed.jpg'
+            }) 
+            s3.getObject(params, function(err,data){
+                if (err) 
+                {
+                    console.error(err.stack)
+                    res.status(400)
+                    res.end()
+                }
+                else
+                {
+                    res.status(200)
+                    res.end(JSON.stringify(data))
+                }
+            })
         }
     }
     else

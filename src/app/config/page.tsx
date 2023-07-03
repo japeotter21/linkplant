@@ -31,7 +31,7 @@ export default function Config() {
     const [upload, setUpload] = useState(false)
     const [profilePic, setProfilePic] = useState(profile)
     const [editBio, setEditBio] = useState('')
-    const [newPicture, setNewPicture] = useState('')
+    const [newPicture, setNewPicture] = useState<HTMLImageElement>()
     const [deleteSite, setDeleteSite] = useState('')
     const [updatedItems, setUpdatedItems] = useState(0)
     const [itemsToUpdate, setItemsToUpdate] = useState(0)
@@ -45,7 +45,11 @@ export default function Config() {
                 setUser(user.documents[0])
                 setSites(sites.documents)
                 setEditBio(user.documents[0].bio)
-                setLoading(false)
+                if(sessionStorage.getItem('pw') && sessionStorage.getItem('pw') === '1')
+                {
+                    setLoading(false)
+                    sessionStorage.removeItem('pw')
+                }
           })
         );
     },[])
@@ -86,8 +90,8 @@ export default function Config() {
         }
     },[readyUpdate])
 
-    function EditPicture() {
-        console.log('pic:', newPicture)
+    function EditPicture(formData: any) {
+        setNewPicture(formData.target.files[0])
     }
 
     function EditSites(formData: any) {
@@ -166,6 +170,17 @@ export default function Config() {
                     setDeleteSite('')
                 })
             })
+    }
+
+    function AddPicture() {
+        axios.post('/api/update?type=picture', newPicture)
+        .then(res=>{
+            const b64Response = btoa(res.data)
+            var outputImg = document.createElement('img');
+            outputImg.src = 'data:image/png;base64,'+b64Response
+            setNewPicture(outputImg)
+        })
+        
     }
 
     const SiteCards = () => {
@@ -350,8 +365,8 @@ export default function Config() {
                 <DialogTitle className='font-medium'>Edit Profile Picture</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        <input type='file' id="profile" name="profile" className='font-medium' value={newPicture}
-                            accept="image/png, image/jpeg" onChange={(e)=>setNewPicture(e.target.value)}
+                        <input type='file' id="profile" name="profile" className='font-medium'
+                            accept="image/png, image/jpeg" onChange={(e)=>EditPicture(e)}
                         />
                     </DialogContentText>
                     
@@ -363,7 +378,7 @@ export default function Config() {
                         Cancel
                     </button>
                     <button className='border border-zinc-600 rounded-lg bg-green-700 hover:bg-green-600 px-4 py-2 text-neutral-200'
-                        onClick={EditPicture}
+                        onClick={AddPicture}
                     >
                         Save to Profile
                     </button>
