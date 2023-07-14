@@ -15,7 +15,7 @@ https://linkplant-shun.vercel.app/
 
 To Do:
 <p>✅ set up db</p>
-<p>✅ actually map sites from profile</p>
+<p>✅ conenct db</p>
 <p>✅ editable site information</p>
 <p>✅ deploy</p>
 <p>✅ auth for editing</p>
