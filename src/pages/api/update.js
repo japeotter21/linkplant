@@ -3,7 +3,12 @@ import axios from 'axios'
 import AWS from 'aws-sdk'
 
 export default function handler(req, res) {
-    if (req.method === 'POST')
+    let auth = false
+    if (req.headers.authorization)
+    {
+        auth = req.headers.authorization.split(' ')[1] === btoa(process.env.EDIT_USE+':'+process.env.EDIT_PW)
+    }
+    if (req.method === 'POST' && auth)
     {
         if(req.query.type === 'user')
         {
@@ -104,7 +109,7 @@ export default function handler(req, res) {
     }
     else
     {
-        res.status(405).send({ message: `${req.method} not allowed` })
+        res.status(403).send({ message: `${req.method} not allowed` })
         return
     }
     

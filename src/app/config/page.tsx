@@ -45,11 +45,9 @@ export default function Config() {
                 setUser(user.documents[0])
                 setSites(sites.documents)
                 setEditBio(user.documents[0].bio)
-                if(sessionStorage.getItem('pw') && sessionStorage.getItem('pw') === '1')
-                {
+               
                     setLoading(false)
                     sessionStorage.removeItem('pw')
-                }
           })
         );
     },[])
@@ -294,7 +292,8 @@ export default function Config() {
                                         />
                                     </div>
                                     <button type="submit"
-                                        className='border border-zinc-600 rounded-lg bg-[#f5b504] bg-opacity-80 hover:bg-opacity-60 px-5 py-1 mt-5 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'
+                                        className='border border-zinc-600 rounded-lg bg-[#f5b504] bg-opacity-80 hover:bg-opacity-60 hover:scale-105 px-5 py-1 transition delay-100 duration-300
+                                        mt-5 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'
                                     >
                                         Add to Profile
                                     </button>
@@ -349,11 +348,11 @@ export default function Config() {
                 </div>
                 <div className='w-3/4 lg:w-1/2 mx-auto mt-5 gap-4 flex justify-between lg:justify-end'>
                     <Link href="/" >
-                        <button className='border border-zinc-600 rounded-lg bg-gray-200 hover:bg-gray-300 px-4 py-2 text-neutral-700'>
+                        <button className='border border-zinc-600 rounded-lg bg-gray-200 hover:bg-gray-300 px-4 py-2 text-neutral-700 hover:scale-105 transition delay-100 duration-300'>
                             Cancel
                         </button>
                     </Link>
-                    <button className='border border-zinc-600 rounded-lg bg-green-700 hover:bg-green-600 px-4 py-2 text-neutral-200'
+                    <button className='border border-zinc-600 rounded-lg bg-green-700 hover:bg-green-600 px-4 py-2 text-neutral-200 hover:scale-105 transition delay-100 duration-300'
                         onClick={EditSites}
                     >
                         Save Changes

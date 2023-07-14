@@ -123,16 +123,14 @@ const [allowEdit, setAllowEdit] = useState(false)
               </a>
             ))
           }
-          { allowEdit ?
-          <Link href="/config">
-              <button className='border border-zinc-600 rounded-lg bg-[#f5b504] hover:bg-opacity-60 px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'
+          <Link href="/login">
+              <button className='border border-zinc-600 rounded-lg bg-[#f5b504] hover:bg-opacity-60 hover:scale-105 transition delay-100 duration-300
+                px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'
               >
                   Edit Profile
               </button>
           </Link>
-          :
-          <></>
-          }
+          
         </div>
         <Dialog open={showPw} onClose={()=>setShowPw(false)}>
           <DialogContent>
