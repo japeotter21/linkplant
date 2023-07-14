@@ -18,5 +18,6 @@ To Do:
 <p>✅ actually map sites from profile</p>
 <p>✅ editable site information</p>
 <p>✅ deploy</p>
-<p>⬜ auth for editing</p>
+<p>✅ auth for editing</p>
+<p>⬜ better visual feedback for login, updates, and warnings</p>
 <p>⬜ connect S3 for profile picture editing</p>
