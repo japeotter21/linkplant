@@ -4,12 +4,14 @@ import axios from 'axios'
 export default function handler(req, res) {
     if (req.method === 'POST')
     {
-        if(req.body.data === process.env.EDIT_PW)
+        const postObj = atob(req.body.data)
+        const auth = postObj.split(':')
+        if(auth[0] === process.env.EDIT_USE && auth[1] === process.env.EDIT_PW)
         {
-            res.status(200).json({data: true});
+            res.status(200).json({data: 'Basic ' + req.body.data});
         }
         {
-            res.status(403).json({data: 'request failed'})
+            res.status(403).json({data: 'Incorrect username or password'})
         }
         
     }

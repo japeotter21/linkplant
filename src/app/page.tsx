@@ -58,6 +58,7 @@ const [allowEdit, setAllowEdit] = useState(false)
         </>
       :
       <>
+        <button onClick={()=>setShowPw(true)} className='h-[20px] w-[25px]'></button>
         <div className="items-center text-sm mb-5 mt-4">
             <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto mb-4'
               width={80}
@@ -102,6 +103,14 @@ const [allowEdit, setAllowEdit] = useState(false)
               </a>
             ))
           }
+          <Link href="/login">
+              <button className='border border-zinc-600 rounded-lg bg-[#f5b504] hover:bg-opacity-60 hover:scale-105 transition delay-100 duration-300
+                px-5 py-1 mt-3 flex items-center mx-auto shadow-[3px_3px_#3d3d3d]'
+              >
+                  Edit Profile
+              </button>
+          </Link>
+          
         </div>
       </>
       }
