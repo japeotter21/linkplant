@@ -11,7 +11,6 @@ https://linkplant-shun.vercel.app/
 ## Configure Available Links
 
 <img src='https://github.com/japeotter21/linkplant/assets/97000604/4c0d786c-ff91-4270-8d3a-45aead61c548' height='400' />
-<img src='https://github.com/japeotter21/linkplant/assets/97000604/74bb4876-ceba-417f-9b12-842345b8cd3f' height='400' />
 <img src='https://github.com/japeotter21/linkplant/assets/97000604/3362beb2-b7fd-4529-902d-7d087e514a18' height='400' />
 
 To Do:
