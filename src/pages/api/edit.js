@@ -2,7 +2,7 @@ require('dotenv').config()
 import axios from 'axios'
 
 export default function handler(req, res) {
-    if (req.method === 'POST')
+    if (req.body.data)
     {
         const postObj = atob(req.body.data)
         const auth = postObj.split(':')

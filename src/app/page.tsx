@@ -44,7 +44,7 @@ const [allowEdit, setAllowEdit] = useState(false)
     <main className="flex min-h-screen flex-col items-center gap-4">
       { loading ?
         <>
-          <div className="items-center text-sm mb-5 mt-10">
+          <div className="items-center text-sm mb-5 mt-12">
               <div className="animate-pulse flex flex-col items-center">
                   <div className="h-[80px] bg-gray-500 rounded-3xl w-[80px] mb-4"></div>
                   <div className="h-5 bg-gray-500 rounded-full w-48 mb-4"></div>
@@ -58,8 +58,7 @@ const [allowEdit, setAllowEdit] = useState(false)
         </>
       :
       <>
-        <button onClick={()=>setShowPw(true)} className='h-[20px] w-[25px]'></button>
-        <div className="items-center text-sm mb-5 mt-4">
+        <div className="items-center text-sm mb-5 mt-12">
             <Image src={profile} alt="tatsuyoshi" className='rounded-3xl mx-auto mb-4'
               width={80}
               height={80}

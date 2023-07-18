@@ -337,7 +337,7 @@ export default function Config() {
                         <BsPencil style={{color:'#3b82f6'}} />
                     </button>
                 </div>
-                <div className="text-sm mb-5 w-1/2 mx-auto relative">
+                <div className="text-sm mb-5 w-3/4 lg:w-1/2 mx-auto relative">
                     <textarea id="bio" name="bio" placeholder='Add a bio here' className='border border-zinc-600 bg-gray-50 p-2 rounded-md w-full font-medium'
                         value={editBio} onChange={(e)=>setEditBio(e.target.value)}
                     />

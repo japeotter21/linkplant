@@ -26,7 +26,7 @@ export default function Config() {
     return (
         <main className="min-h-screen grid place-items-center">
             <div className="grid place-items-center h-full w-full">
-                <div className='border border-black w-1/3 bg-gray-50 rounded-lg flex flex-col items-center justify-center gap-4 h-[34vh]'>
+                <div className='border border-black w-5/6 lg:w-1/3 bg-gray-50 rounded-lg flex flex-col items-center justify-center gap-4 h-[34vh]'>
                     <p className='text-3xl mb-4'>Login</p>
                     <form id="newsite" className=' flex flex-col items-center gap-3 '
                         onSubmit={(e)=>{e.preventDefault()
