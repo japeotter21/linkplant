@@ -2,7 +2,7 @@ require('dotenv').config()
 import axios from 'axios'
 
 export default function handler(req, res) {
-    if (req.body.data)
+    if (req.method === 'POST')
     {
         const postObj = atob(req.body.data)
         const auth = postObj.split(':')
@@ -10,6 +10,7 @@ export default function handler(req, res) {
         {
             res.status(200).json({data: 'Basic ' + req.body.data});
         }
+        else
         {
             res.status(403).json({data: 'Incorrect username or password'})
         }
